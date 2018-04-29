@@ -5,6 +5,11 @@ import os
 import ast
 
 from astpath.asts import convert_to_xml
+try:
+    from lxml import etree
+    use_lxml=True
+except ImportError:
+    import xml.etree.ElementTree as etree
 
 
 PYTHON_EXTENSION = '{}py'.format(os.path.extsep)
@@ -141,7 +146,13 @@ def search(directory, expression, show_astxml=True, print_matches=True, return_l
                     node_mappings=node_mappings,
                 )
                 if show_astxml:
-                    pass
+                    if use_lxml:
+                        #print(etree.tostring(xml_ast,pretty_print=True))
+                        print(str(etree.tostring(xml_ast),'utf8'))
+                    else:
+                        xml_ast.write("/dev/stdout")
+                        #xml_ast.write("/tmp/x.xml")
+                    continue
             except Exception:
                 if verbose:
                     print("WARNING: Unable to parse or read {}".format(

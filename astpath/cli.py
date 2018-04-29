@@ -19,6 +19,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--hide-lines', help="hide source lines, showing only line numbers", action='store_true',)
 parser.add_argument('-v', '--verbose', help="increase output verbosity", action='store_true',)
 parser.add_argument('-a', '--abspaths', help="show absolute paths", action='store_true',)
+parser.add_argument('-x', '--astxml', help="show astxml", action='store_true',)
 parser.add_argument('-R', '--no-recurse', help="ignore subdirectories, searching only files in the specified directory", action='store_true',)
 parser.add_argument('-d', '--dir', help="search directory or file", default='.',)
 parser.add_argument('-A', '--after-context', help="lines of context to display after matching line", type=int, default=0,)
@@ -48,6 +49,7 @@ def main():
         args.dir,
         ' '.join(args.expr),
         show_lines=not args.hide_lines,
+        show_astxml=args.astxml,
         verbose=args.verbose,
         abspaths=args.abspaths,
         recurse=recurse,
