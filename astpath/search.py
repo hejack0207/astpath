@@ -88,7 +88,7 @@ def file_to_xml_ast(filename, omit_docstrings=False, node_mappings=None):
     )
 
 
-def search(directory, expression, print_matches=True, return_lines=True, show_lines=True, verbose=False, abspaths=False, recurse=True, before_context=0, after_context=0):
+def search(directory, expression, show_astxml=True, print_matches=True, return_lines=True, show_lines=True, verbose=False, abspaths=False, recurse=True, before_context=0, after_context=0):
     """
     Perform a recursive search through Python files.
 
@@ -140,6 +140,8 @@ def search(directory, expression, print_matches=True, return_lines=True, show_li
                     contents,
                     node_mappings=node_mappings,
                 )
+                if show_astxml:
+                    pass
             except Exception:
                 if verbose:
                     print("WARNING: Unable to parse or read {}".format(
